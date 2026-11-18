@@ -293,7 +293,7 @@ function renderGrid(bq, W, H, angle, t, opts = {}) {
 
 // ---- Scriptable widget ----------------------------------------------------
 // Paste the link to your hosted flowers page here (tapping the widget opens it):
-const PAGE_URL = "https://YOUR-USERNAME.github.io/flowers/";
+const PAGE_URL = "https://goldyb320.github.io/flowers/";
 
 const fam = config.widgetFamily || "large";
 const SIZES = { small: [510, 510, 46], medium: [1092, 510, 86], large: [1092, 1146, 86], extraLarge: [2280, 1146, 150] };
@@ -305,7 +305,7 @@ const bq = makeBouquet(day);
 // iOS refreshes widgets on its own schedule, so instead of a live spin the
 // bouquet turns a little every time it refreshes over the day.
 const angle = ((now - day) / 86400000) * TAU * 24;
-const cell = PW / COLS, rows = Math.floor(PH / (cell * 2));
+const cell = PW / COLS, rows = Math.floor(PH * 0.86 / (cell * 2)); // margin so rounded corners don't clip
 const grid = renderGrid(bq, COLS, rows, angle, now.getTime() / 1000, { noCaption: fam === "small" });
 
 const dc = new DrawContext();
@@ -331,8 +331,8 @@ for (let y = 0; y < rows; y++) {
 
 const w = new ListWidget();
 w.backgroundImage = dc.getImage();
-w.url = PAGE_URL;
+// tapping the widget runs this script in the app, which shows the spinning page
 w.refreshAfterDate = new Date(Date.now() + 20 * 60 * 1000);
 if (config.runsInWidget) Script.setWidget(w);
-else await w["present" + (fam === "small" ? "Small" : fam === "medium" ? "Medium" : "Large")]();
+else await WebView.loadURL(PAGE_URL, null, true); // run in the app: show the spinning version
 Script.complete();
