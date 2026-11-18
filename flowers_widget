@@ -12,10 +12,11 @@
 // same bouquet in Python, on the web page and in the iPhone widget.
 
 const NOTES = [
-  "picked fresh for you",
-  "wildflowers, always in season",
-  "a new bouquet every day",
-  "thinking of you",
+  "Picked fresh for you",
+  "Wildflowers, always in season",
+  "A new bouquet every day",
+  "Thinking of you",
+  "I miss you",
 ];
 const BG = [22, 26, 48];
 const TAU = Math.PI * 2;
